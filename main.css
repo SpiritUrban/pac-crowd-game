@@ -77,8 +77,8 @@
 
 body {
     background: green;
-    background: url(src/img/grass_013.jpg);
-    background: url(src/img/underground.jpg);
+    /* background: url(src/img/grass_013.jpg); */
+    /* background: url(src/img/underground.jpg); */
 
     background-size: cover;
     background-size: 400px;
