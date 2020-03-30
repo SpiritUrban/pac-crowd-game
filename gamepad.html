@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" type="image/png"
+        href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+    <link rel="shortcut icon" type="image/x-icon"
+        href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+    <link rel="mask-icon" type=""
+        href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+        color="#111" />
+    <title>CodePen - gamepad</title>
+    <link rel="stylesheet" href="main.css">
+
+</head>
+
+<body translate="no" id="body">
+
+    <div class="panel">
+        <div class="score-title">Score: <span class="score-num">0</span> </div>
+        <div class="level-title">Level: <span class="level-num">0</span> &nbsp; </div>
+
+    </div>
+
+    <br><br><br><br><br>
+
+    <div id="width_px" class="big">***</div>
+    <div id="width_ems" class="big">***</div>
+
+    <div id="height_px" class="big">***</div>
+    <div id="height_ems" class="big">***</div>
+
+    <button onclick="localStorage.setItem('level', 0); location.reload()">Reset level</button>
+    <button onclick="nextLevel()">Next Level</button>
+
+    
+    
+
+
+    <div id="ball" class="ball pers "></div>
+
+    <audio>
+        <source src="src/sounds/am.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="won">
+        <source src="src/sounds/won.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>

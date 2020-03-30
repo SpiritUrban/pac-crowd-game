@@ -1,0 +1,123 @@
+.ball {
+    width: 1.9em;
+    height: 1.9em;
+    background: orange;
+    border-radius: 1em;
+    position: absolute;
+    transition: .2s;
+}
+
+.cristal{
+    position: absolute;
+
+    width: 1.9em;
+    height: 1.9em;
+    background: greenyellow;
+}
+
+.pers {
+    transition: 0.1;
+     background: orange;
+     background: url(src/img/sprite.png);
+     background-position: -25.1em -10.2em;
+     background-position: -25.1em -12.7em;
+     background-position: -25.1em -15.15em;
+     background-position: -25.1em -17.6em;
+     background-position: -25.1em -20.1em;
+     background-position: -25.1em -22.55em;
+
+
+     background-size: 50em;
+     animation-name: kus;
+    animation-duration: 1s;
+    /* animation-delay: 2s; */
+    animation-iteration-count: infinite;
+    animation-timing-function:steps(1); /* not trnsition */
+
+    /* transform: scale(-1, 1); */
+    
+}
+
+.en {
+    background-size: 50em;
+    background: url(src/img/sprite.png);
+    background-position: -22.8em -0.6em;
+
+    animation-name: eee;
+    animation-duration: 1s;
+    /* animation-delay: 2s; */
+    animation-iteration-count: infinite;
+    animation-timing-function:steps(1); /* not trnsition */
+    animation-direction: alternate;
+}
+.reverse {
+    transform: scale(-1, 1);
+
+}
+
+@keyframes kus {
+    0%   {background-position: -25.1em -10.2em;}
+    20%  {background-position: -25.1em -12.7em;}
+    40%  {background-position: -25.1em -15.15em;}
+
+    60% {background-position: -25.1em -17.6em;}
+    80%  {background-position: -25.1em -20.1em;}
+    90% {background-position: -25.1em -22.55em;}
+  }
+
+  @keyframes eee {
+    0%   {background-position: -22.8em -0.6em;}
+    20%  {background-position: -22.8em -3.4em;}
+    40%  {background-position: -22.8em -6.1em;}
+
+    60% {background-position: -22.8em -8.95em;}
+    80%  {background-position: -22.8em -11.7em;}
+    90% {background-position: -22.8em -14.6em;}
+  }
+
+body {
+    background: green;
+    background: url(src/img/grass_013.jpg);
+    background: url(src/img/underground.jpg);
+
+    background-size: cover;
+    background-size: 400px;
+    overflow: hidden;
+    /* font-size: 10px; */
+}
+
+.panel {
+    position: fixed;
+    top: 0;
+    Left: 0;
+    width: 100%;
+    /* width: 42em; */
+    /* height: 30em; */
+    padding: .5em;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+}
+.score-title {
+    color: gray;
+    font-size: 2em;
+    z-index: 100;
+}
+.score-num {
+    color: white;
+    z-index: 100;
+}
+.level-title {
+    color: gray;
+    font-size: 2em;
+    z-index: 100;
+}
+.level-num {
+    color: white;
+    z-index: 100;
+}
+
+.big{
+    font-size: 2em;
+    color: aliceblue;
+}
