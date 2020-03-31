@@ -122,17 +122,11 @@ function setLevelDesign() {
         [3, _ => setBgSize(200)],
         [4, _ => setBgSize(600)],
         [5, _ => setBgSize(300)],
-
     ])
 }
 
 
-function _case(point, cases) {
-    cases.forEach((item) => {
-        console.log(point == item[0], point, item[0])
-        if (point == item[0]) item[1]()
-    })
-}
+
 
 function setBgSize(size) {
     body.style.backgroundSize = size + 'px'

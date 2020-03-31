@@ -1,7 +1,4 @@
 
-// alert(getGameScore())
-
-console.log('*****************', parseFloat(getComputedStyle(body).fontSize));
 
 // onresize
 window.onresize = whenResize;
@@ -10,21 +7,6 @@ function whenResize() {
     showSizes();
 };
 whenResize()
-
-
-
-window.addEventListener("gamepadconnected", function (e) {
-    console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
-        e.gamepad.index, e.gamepad.id,
-        e.gamepad.buttons.length, e.gamepad.axes.length);
-    restart()
-    window.loop = setInterval(gameLoop, 50)
-});
-
-window.addEventListener("gamepaddisconnected", function (e) {
-    console.log("Gamepad disconnected from index %d: %s",
-        e.gamepad.index, e.gamepad.id);
-});
 
 
 
@@ -77,12 +59,25 @@ function gameLoop() {
 
 };
 
-setGameScore()
+window.addEventListener("gamepadconnected", function (e) {
+    console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
+        e.gamepad.index, e.gamepad.id,
+        e.gamepad.buttons.length, e.gamepad.axes.length);
+    restart()
+    window.loop = setInterval(gameLoop, 50)
+});
+
+window.addEventListener("gamepaddisconnected", function (e) {
+    console.log("Gamepad disconnected from index %d: %s",
+        e.gamepad.index, e.gamepad.id);
+});
+
+setGameScore();
+setGameLevel();
+setLevelDesign();
 
 
-setGameLevel()
 
-setLevelDesign()
 
 
 // _case(1, [

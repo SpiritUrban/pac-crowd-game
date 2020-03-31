@@ -26,14 +26,22 @@
 
     <br><br><br><br><br>
 
-    <div id="width_px" class="big">***</div>
-    <div id="width_ems" class="big">***</div>
+    <div id="indicators">
+        <div id="width_px" class="big">***</div>
+        <div id="width_ems" class="big">***</div>
+        <div id="height_px" class="big">***</div>
+        <div id="height_ems" class="big">***</div>
+    </div>
 
-    <div id="height_px" class="big">***</div>
-    <div id="height_ems" class="big">***</div>
+    <br><br>
 
-    <button onclick="localStorage.setItem('level', 0); location.reload()">Reset level</button>
-    <button onclick="nextLevel()">Next Level</button>
+    <div id="dev-controls">
+        <button onclick="localStorage.setItem('level', 0); location.reload()">Reset level</button> <br><br>
+        <button onclick="nextLevel()">Next Level</button>
+    </div>
+
+
+
 
     
     
@@ -51,6 +59,8 @@
         Your browser does not support the audio element.
     </audio>
 
+    
+    <script src="stuff-31-03-2020.js"></script>
     <script src="functions.js"></script>
     <script src="variables.js"></script>
     <script src="main.js"></script>

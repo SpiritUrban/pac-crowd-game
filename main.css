@@ -121,3 +121,11 @@ body {
     font-size: 2em;
     color: aliceblue;
 }
+
+#dev-controls, #indicators {
+    display: inline-block;
+    padding: 1em;
+    border-radius: 1em;
+    background: rgba(76, 0, 130, 0.377);
+}
+
