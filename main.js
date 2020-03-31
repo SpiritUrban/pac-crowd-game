@@ -2,6 +2,9 @@ let score = getGameScore()
 let level = getGameLevel()
 var x = 0;
 var y = 0;
+// let enList = [];
+// let cristalList = [];
+
 let pers = {
     x: 0,
     y: 0,
@@ -31,7 +34,17 @@ const scene = {
         };
     }
 }
-
+// limit
+const limitArea = {
+    x: {
+        begin: 1,
+        end: scene.width.em - 3
+    },
+    y: {
+        begin: 1,
+        end: scene.height.em - 8
+    }
+}
 // alert(getGameScore())
 
 console.log('*****************', parseFloat(getComputedStyle(body).fontSize))
@@ -41,14 +54,6 @@ function whenResize() {
     showSizes();
 };
 whenResize()
-
-function showSizes() {
-    // window.screen.width
-    document.getElementById("width_px").innerHTML = scene.width.px;
-    document.getElementById("width_ems").innerHTML = scene.width.em;
-    document.getElementById("height_px").innerHTML = scene.height.px;
-    document.getElementById("height_ems").innerHTML = scene.height.em;
-}
 
 function toSow(classes, amount = 1) {
     // const theHarvest = []
@@ -63,8 +68,6 @@ function toSow(classes, amount = 1) {
     // return theHarvest
 }
 
-// let enList = [];
-// let cristalList = [];
 function restart() {
     toSow(['ball', 'en'], 1);
     toSow(['ball', 'cristal'], 1);
@@ -128,7 +131,7 @@ function gameLoop() {
     if (allEn == null) nextLevel()
 
     if (navigator.webkitGetGamepads) {
-        alert('webkitGetGamepads')
+        alert('webkitGetGamepads detected')
         var gp = navigator.webkitGetGamepads()[0];
         if (gp.buttons[0] == 1) y = -1;
         if (gp.buttons[1] == 1) x = 1;
@@ -137,22 +140,19 @@ function gameLoop() {
     } else {
         var gp = navigator.getGamepads()[0];
 
-        gp.buttons.forEach((b, i) => {
-            // console.log(i, ': ', b.pressed, b.value)
-        })
-
-
-        if (gp.buttons[0].value > 0 || gp.buttons[0].pressed == true) {
-            y = -1
+        function isButton(gp, i) {
+            console.log('>>> ', gp.buttons[i], i)
+            if (typeof gp.buttons[i] == 'number') return gp.buttons[0] == 1; // ??? // for webkitGetGamepads
+            return (gp.buttons[i].value > 0 || gp.buttons[i].pressed == true)
         }
-        if (gp.buttons[2].value > 0 || gp.buttons[2].pressed == true) {
-            y = 1
-        }
-        if (gp.buttons[1].value > 0 || gp.buttons[1].pressed == true) {
+
+        if (isButton(gp, 0)) y = -1
+        if (isButton(gp, 2)) y = 1
+        if (isButton(gp, 1)) {
             x = 1
             pers.link.classList.remove('reverse')
         }
-        if (gp.buttons[3].value > 0 || gp.buttons[3].pressed == true) {
+        if (isButton(gp, 3)) {
             x = -1
             pers.link.classList.add('reverse')
         }
@@ -185,17 +185,7 @@ function gameLoop() {
         // currentPosition
         const currentPosition = getPosition(en)
 
-        // limit
-        const limitArea = {
-            x: {
-                begin: 1,
-                end: scene.width.em - 3
-            },
-            y: {
-                begin: 1,
-                end: scene.height.em - 8
-            }
-        }
+
 
         // new Position
         let { x, y } = limitPosition(limitArea, currentPosition)
@@ -204,11 +194,11 @@ function gameLoop() {
 
 };
 
-function isIntersected(rect, rectSelection ) {
-    return ( rect.top + rect.height > rectSelection.top
+function isIntersected(rect, rectSelection) {
+    return (rect.top + rect.height > rectSelection.top
         && rect.left + rect.width > rectSelection.left
         && rect.bottom - rect.height < rectSelection.bottom
-        && rect.right - rect.width < rectSelection.right )
+        && rect.right - rect.width < rectSelection.right)
 }
 function getPosition(el) {
     return {
@@ -285,6 +275,16 @@ function _case(point, cases) {
 function setBgSize(size) {
     body.style.backgroundSize = size + 'px'
 }
+
+function showSizes() {
+    // window.screen.width
+    document.getElementById("width_px").innerHTML = scene.width.px;
+    document.getElementById("width_ems").innerHTML = scene.width.em;
+    document.getElementById("height_px").innerHTML = scene.height.px;
+    document.getElementById("height_ems").innerHTML = scene.height.em;
+}
+
+
 // _case(1, [
 //     [1, () => alert('Goood-1')],
 //     [1, () => console.log('Goood-1')],
