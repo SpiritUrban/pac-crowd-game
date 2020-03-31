@@ -10,30 +10,14 @@ let pers = {
     y: 0,
     link: document.querySelector('.pers')
 }
-const body = document.querySelector('body')
+const body = document.querySelector('body');
+const ball = document.querySelector('#ball');
 
-const emInPx = parseFloat(getComputedStyle(body).fontSize);
 
-const scene = {
-    width: {
-        px: window.innerWidth,
-        em: window.innerWidth / emInPx
-    },
-    height: {
-        px: window.innerHeight,
-        em: window.innerHeight / emInPx
-    },
-    refresh: () => {
-        scene.width = {
-            px: window.innerWidth,
-            em: window.innerWidth / emInPx
-        };
-        scene.height = {
-            px: window.innerHeight,
-            em: window.innerHeight / emInPx
-        };
-    }
-}
+
+let scene = getSceneSize();
+
+
 // limit
 const limitArea = {
     x: {

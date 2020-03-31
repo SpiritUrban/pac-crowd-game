@@ -16,16 +16,12 @@ function restart() {
     toSow(['ball', 'cristal'], 1);
 }
 
-function toCollect(by) {
-    return document.querySelectorAll(by)
-}
-
+// Gamepad Button Checker
 function isButton(gp, i) {
     console.log('>>> ', gp.buttons[i], i)
     if (typeof gp.buttons[i] == 'number') return gp.buttons[0] == 1; // ??? // for webkitGetGamepads
     return (gp.buttons[i].value > 0 || gp.buttons[i].pressed == true)
 }
-
 
 function move(x, y) {
     if (x) pers.x += x;
@@ -40,6 +36,7 @@ function move(x, y) {
     pers.link.style.top = pers.y * 10 + "px";
 }
 
+// Level
 let levelLocker = false
 function nextLevel() {
     if (!levelLocker) {
@@ -56,38 +53,7 @@ function nextLevel() {
     }
 }
 
-
-function isIntersected(rect, rectSelection) {
-    return (rect.top + rect.height > rectSelection.top
-        && rect.left + rect.width > rectSelection.left
-        && rect.bottom - rect.height < rectSelection.bottom
-        && rect.right - rect.width < rectSelection.right)
-}
-function getPosition(el) {
-    return {
-        x: parseInt(el.style.left, 10),
-        y: parseInt(el.style.top, 10)
-    }
-}
-
-function setPosition(el, x, y) {
-    el.style.left = x + ((Math.random() * 4) - 1) + 'em'
-    el.style.top = y + ((Math.random() * 4) - 1) + 'em'
-}
-
-function limitPosition(limitArea, currentPosition) {
-    let { x, y } = currentPosition
-    // new Position
-    return {
-        x: (x < 1) ? scene.width.em - 5 : (x > scene.width.em - 3) ? 1 : x,
-        y: (x < 1) ? scene.height.em - 5 : (y > scene.height.em - 8) ? 1 : y
-    }
-    // if (x < 1) x = scene.width.em - 5;
-    // if (x > scene.width.em - 3) x = 1;
-    // if (y < 1) y = scene.height.em - 5;
-    // if (y > scene.height.em - 8) y = 1;
-}
-
+// GameScore
 function getGameScore() {
     let score = +localStorage.getItem('score')
     if (typeof score !== 'number') score = 0
@@ -98,7 +64,7 @@ function setGameScore() {
     document.querySelector('.score-num').innerHTML = localStorage.getItem('score')
 }
 
-
+// GameLevel
 function getGameLevel() {
     let level = +localStorage.getItem('level')
     if (typeof level !== 'number') level = 0
@@ -109,8 +75,7 @@ function setGameLevel() {
     document.querySelector('.level-num').innerHTML = localStorage.getItem('level')
 }
 
-
-
+//LevelDesign
 function setLevelDesign() {
     body.style.background = `url(src/img/bg_${level}.jpg)`
     body.style.backgroundSize = 'cover'
@@ -124,18 +89,8 @@ function setLevelDesign() {
         [5, _ => setBgSize(300)],
     ])
 }
-
-
-
-
 function setBgSize(size) {
     body.style.backgroundSize = size + 'px'
 }
 
-function showSizes() {
-    // window.screen.width
-    document.getElementById("width_px").innerHTML = scene.width.px;
-    document.getElementById("width_ems").innerHTML = scene.width.em;
-    document.getElementById("height_px").innerHTML = scene.height.px;
-    document.getElementById("height_ems").innerHTML = scene.height.em;
-}
+
