@@ -159,19 +159,12 @@ function gameLoop() {
         move(x, y)
     }
 
-    // if ((top1 <= top2 && bottom1 >= top2) || (top2 <= top1 && bottom2 >= top1)) {
-    // }
-
     var rectSelection = ball.getBoundingClientRect();
 
-    toCollect('.cristal').forEach((p)=>{
+    toCollect('.cristal').forEach((p) => {
         var rect = p.getBoundingClientRect();
-
-        if (rect.top + rect.height > rectSelection.top
-            && rect.left + rect.width > rectSelection.left
-            && rect.bottom - rect.height < rectSelection.bottom
-            && rect.right - rect.width < rectSelection.right) {
-            // li.classList.add("selected");
+        // remove
+        if (isIntersected(rect, rectSelection)) {
             p.remove()
             audio.play()
             score++
@@ -179,91 +172,68 @@ function gameLoop() {
         }
     });
 
-    toCollect('.en').forEach((en)=>{
+    toCollect('.en').forEach((en) => {
         var rect = en.getBoundingClientRect();
-
-        if (rect.top + rect.height > rectSelection.top
-            && rect.left + rect.width > rectSelection.left
-            && rect.bottom - rect.height < rectSelection.bottom
-            && rect.right - rect.width < rectSelection.right) {
-            // li.classList.add("selected");
+        // remove
+        if (isIntersected(rect, rectSelection)) {
             en.remove()
             audio.play()
             score++
             setGameScore()
         }
 
-        let x = parseInt(en.style.left, 10);
-        let y = parseInt(en.style.top, 10);
+        // currentPosition
+        const currentPosition = getPosition(en)
+
         // limit
-        if (x < 1) x = scene.width.em - 5;
-        if (y < 1) y = scene.height.em - 5;
-        if (x > scene.width.em - 3) x = 1;
-        if (y > scene.height.em - 8) y = 1;
-        // DOM
-        // console.log(parseInt(en.style.left, 10), en.style.left)
-        en.style.left = x + ((Math.random() * 4) - 1) + 'em'
-        en.style.top = y + ((Math.random() * 4) - 1) + 'em' 
+        const limitArea = {
+            x: {
+                begin: 1,
+                end: scene.width.em - 3
+            },
+            y: {
+                begin: 1,
+                end: scene.height.em - 8
+            }
+        }
+
+        // new Position
+        let { x, y } = limitPosition(limitArea, currentPosition)
+        setPosition(en, x, y)
     })
-
-    // cristal
-    // [].forEach.call(document.querySelectorAll(".cristal"), function (en) {
-    //     var rect = en.getBoundingClientRect();
-
-    //     if (rect.top + rect.height > rectSelection.top
-    //         && rect.left + rect.width > rectSelection.left
-    //         && rect.bottom - rect.height < rectSelection.bottom
-    //         && rect.right - rect.width < rectSelection.right) {
-    //         // li.classList.add("selected");
-    //         en.remove()
-    //         audio.play()
-    //         score++
-    //         setGameScore()
-    //     }
-
-    //     // let x = parseInt(en.style.left, 10);
-    //     // let y = parseInt(en.style.top, 10);
-    //     // // limit
-    //     // if (x < 1) x = scene.width.em - 5;
-    //     // if (y < 1) y = scene.height.em - 5;
-    //     // if (x > scene.width.em - 3) x = 1;
-    //     // if (y > scene.height.em - 8) y = 1;
-    //     // // DOM
-    //     // // console.log(parseInt(en.style.left, 10), en.style.left)
-    //     // en.style.left = x + ((Math.random() * 4) - 1) + 'em'
-    //     // en.style.top = y + ((Math.random() * 4) - 1) + 'em'
-    // });
-
-    // Iterate over all LI elements.
-    // [].forEach.call(document.querySelectorAll(".en"), function (en) {
-    //     var rect = en.getBoundingClientRect();
-
-    //     if (rect.top + rect.height > rectSelection.top
-    //         && rect.left + rect.width > rectSelection.left
-    //         && rect.bottom - rect.height < rectSelection.bottom
-    //         && rect.right - rect.width < rectSelection.right) {
-    //         // li.classList.add("selected");
-    //         en.remove()
-    //         audio.play()
-    //         score++
-    //         setGameScore()
-    //     }
-
-    //     let x = parseInt(en.style.left, 10);
-    //     let y = parseInt(en.style.top, 10);
-    //     // limit
-    //     if (x < 1) x = scene.width.em - 5;
-    //     if (y < 1) y = scene.height.em - 5;
-    //     if (x > scene.width.em - 3) x = 1;
-    //     if (y > scene.height.em - 8) y = 1;
-    //     // DOM
-    //     // console.log(parseInt(en.style.left, 10), en.style.left)
-    //     en.style.left = x + ((Math.random() * 4) - 1) + 'em'
-    //     en.style.top = y + ((Math.random() * 4) - 1) + 'em'
-    // });
 
 };
 
+function isIntersected(rect, rectSelection ) {
+    return ( rect.top + rect.height > rectSelection.top
+        && rect.left + rect.width > rectSelection.left
+        && rect.bottom - rect.height < rectSelection.bottom
+        && rect.right - rect.width < rectSelection.right )
+}
+function getPosition(el) {
+    return {
+        x: parseInt(el.style.left, 10),
+        y: parseInt(el.style.top, 10)
+    }
+}
+
+function setPosition(el, x, y) {
+    el.style.left = x + ((Math.random() * 4) - 1) + 'em'
+    el.style.top = y + ((Math.random() * 4) - 1) + 'em'
+}
+
+function limitPosition(limitArea, currentPosition) {
+    let { x, y } = currentPosition
+    // new Position
+    return {
+        x: (x < 1) ? scene.width.em - 5 : (x > scene.width.em - 3) ? 1 : x,
+        y: (x < 1) ? scene.height.em - 5 : (y > scene.height.em - 8) ? 1 : y
+    }
+    // if (x < 1) x = scene.width.em - 5;
+    // if (x > scene.width.em - 3) x = 1;
+    // if (y < 1) y = scene.height.em - 5;
+    // if (y > scene.height.em - 8) y = 1;
+}
 
 function getGameScore() {
     let score = +localStorage.getItem('score')
