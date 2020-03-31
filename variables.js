@@ -12,7 +12,7 @@ let pers = {
 }
 const body = document.querySelector('body');
 const ball = document.querySelector('#ball');
-
+const audio = document.querySelector('audio')
 
 
 let scene = getSceneSize();

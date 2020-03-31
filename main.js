@@ -9,16 +9,59 @@ function whenResize() {
     scene = getSceneSize(); // refresh
     showSizes();
 };
-whenResize()
+whenResize();
+
+
+// GAME
+function toSow(classes, amount = 1) {
+    for (let i = 0; i < amount; i++) {
+        const p = document.createElement('p');
+        p.classList.add(...classes);
+        p.style.left = `${Math.random() * scene.width.em}em`;
+        p.style.top = `${Math.random() * scene.width.em}em`;
+        body.appendChild(p)
+    }
+}
+
+function restart() {
+    toSow(['ball', 'en'], 1);
+    toSow(['ball', 'cristal'], 1);
+}
+
+function processing_of_cristals() {
+    toCollect('.cristal').forEach((p) => {
+        var rect = p.getBoundingClientRect();
+        if (isIntersected(rect, rectSelection)) {
+            p.remove();
+            audio.play();
+            score++;
+            setGameScore();
+        }
+    });
+}
+
+function processing_of_enemies() {
+    toCollect('.en').forEach((en) => {
+        var rect = en.getBoundingClientRect();
+        if (isIntersected(rect, rectSelection)) {
+            en.remove();
+            audio.play();
+            score++;
+            setGameScore();
+        }
+        // currentPosition
+        const currentPosition = getPosition(en)
+        // new Position
+        let { x, y } = limitPosition(limitArea, currentPosition)
+        setPosition(en, x, y)
+    })
+};
 
 
 // setTimeout(nextLevel, 3000)
 function gameLoop() {
-    const allEn = document.querySelector('.en')
-    const audio = document.querySelector('audio')
+    if (!isExist('.en')) nextLevel();
     let x = y = null;
-
-    if (allEn == null) nextLevel()
 
     // CONTROLS
     window.gp = (navigator.webkitGetGamepads) ? navigator.webkitGetGamepads()[0] : navigator.getGamepads()[0]; // Get gamepad
@@ -28,35 +71,11 @@ function gameLoop() {
     if (isButton(gp, 3)) { x = -1; pers.link.classList.add('reverse') }
     move(x, y)
 
-    var rectSelection = ball.getBoundingClientRect();
+    window.rectSelection = ball.getBoundingClientRect();
 
-    toCollect('.cristal').forEach((p) => {
-        var rect = p.getBoundingClientRect();
-        // remove
-        if (isIntersected(rect, rectSelection)) {
-            p.remove()
-            audio.play()
-            score++
-            setGameScore()
-        }
-    });
-
-    toCollect('.en').forEach((en) => {
-        var rect = en.getBoundingClientRect();
-        // remove
-        if (isIntersected(rect, rectSelection)) {
-            en.remove()
-            audio.play()
-            score++
-            setGameScore()
-        }
-        // currentPosition
-        const currentPosition = getPosition(en)
-        // new Position
-        let { x, y } = limitPosition(limitArea, currentPosition)
-        setPosition(en, x, y)
-    })
-
+    // PROCESSING OF UNITS
+    processing_of_cristals() // cristal
+    processing_of_enemies() // enemy
 };
 
 //

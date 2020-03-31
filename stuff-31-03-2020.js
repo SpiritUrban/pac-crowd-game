@@ -18,6 +18,8 @@ function _case(point, cases) {
 //
 // DOM
 //
+const isExist = (el) => toCollect(el).length > 0;
+
 function toCollect(by) {
     return document.querySelectorAll(by)
 }

@@ -1,29 +1,12 @@
 // GAMEPAD
 // Gamepad Button Checker
 function isButton(gp, i) {
-    console.log('>>> ', gp.buttons[i], i)
+    // console.log('>>> ', gp.buttons[i], i)
     if (typeof gp.buttons[i] == 'number') return gp.buttons[0] == 1; // ??? // for webkitGetGamepads
     return (gp.buttons[i].value > 0 || gp.buttons[i].pressed == true)
 }
 
-// GAME
-function toSow(classes, amount = 1) {
-    // const theHarvest = []
-    for (let i = 0; i < amount; i++) {
-        const p = document.createElement('p');
-        p.classList.add(...classes);
-        p.style.left = `${Math.random() * scene.width.em}em`;
-        p.style.top = `${Math.random() * scene.width.em}em`;
-        body.appendChild(p)
-        // theHarvest.push(p)
-    }
-    // return theHarvest
-}
 
-function restart() {
-    toSow(['ball', 'en'], 1);
-    toSow(['ball', 'cristal'], 1);
-}
 
 function move(x, y) {
     if (x) pers.x += x;
