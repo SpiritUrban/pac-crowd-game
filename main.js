@@ -2,6 +2,7 @@ setGameScore();
 setGameLevel();
 setLevelDesign();
 
+
 // onresize
 window.onresize = whenResize;
 function whenResize() {
@@ -9,6 +10,7 @@ function whenResize() {
     showSizes();
 };
 whenResize()
+
 
 // setTimeout(nextLevel, 3000)
 function gameLoop() {
@@ -57,6 +59,9 @@ function gameLoop() {
 
 };
 
+//
+// ready ?
+//
 window.addEventListener("gamepadconnected", function (e) {
     console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
         e.gamepad.index, e.gamepad.id,

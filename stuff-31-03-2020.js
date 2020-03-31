@@ -1,12 +1,12 @@
+//
 // general/universal porpuse function
+//
 
 /* Like swith/case
-
-_case(level, [
-    [0, _ => setBgSize(200)],
-    [1, _ => setBgSize(500)],
-]) 
-
+    _case(level, [
+        [0, _ => setBgSize(200)],
+        [1, _ => setBgSize(500)],
+    ]) 
 */
 function _case(point, cases) {
     cases.forEach((item) => {
@@ -15,16 +15,20 @@ function _case(point, cases) {
     })
 }
 
+//
 // DOM
+//
 function toCollect(by) {
     return document.querySelectorAll(by)
 }
+
 function isIntersected(rect, rectSelection) {
     return (rect.top + rect.height > rectSelection.top
         && rect.left + rect.width > rectSelection.left
         && rect.bottom - rect.height < rectSelection.bottom
         && rect.right - rect.width < rectSelection.right)
 }
+
 function getPosition(el) {
     return {
         x: parseInt(el.style.left, 10),
@@ -35,6 +39,7 @@ function setPosition(el, x, y) {
     el.style.left = x + ((Math.random() * 4) - 1) + 'em'
     el.style.top = y + ((Math.random() * 4) - 1) + 'em'
 }
+
 function limitPosition(limitArea, currentPosition) {
     let { x, y } = currentPosition
     // new Position
@@ -48,8 +53,9 @@ function limitPosition(limitArea, currentPosition) {
     // if (y > scene.height.em - 8) y = 1;
 }
 
-
+//
 // UI indicators for Developing
+//
 const emInPx = () => parseFloat(getComputedStyle(body).fontSize);
 function getSceneSize() {
     return {

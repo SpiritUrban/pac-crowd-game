@@ -1,3 +1,12 @@
+// GAMEPAD
+// Gamepad Button Checker
+function isButton(gp, i) {
+    console.log('>>> ', gp.buttons[i], i)
+    if (typeof gp.buttons[i] == 'number') return gp.buttons[0] == 1; // ??? // for webkitGetGamepads
+    return (gp.buttons[i].value > 0 || gp.buttons[i].pressed == true)
+}
+
+// GAME
 function toSow(classes, amount = 1) {
     // const theHarvest = []
     for (let i = 0; i < amount; i++) {
@@ -14,13 +23,6 @@ function toSow(classes, amount = 1) {
 function restart() {
     toSow(['ball', 'en'], 1);
     toSow(['ball', 'cristal'], 1);
-}
-
-// Gamepad Button Checker
-function isButton(gp, i) {
-    console.log('>>> ', gp.buttons[i], i)
-    if (typeof gp.buttons[i] == 'number') return gp.buttons[0] == 1; // ??? // for webkitGetGamepads
-    return (gp.buttons[i].value > 0 || gp.buttons[i].pressed == true)
 }
 
 function move(x, y) {
