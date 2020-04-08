@@ -24,8 +24,8 @@ function toSow(classes, amount = 1) {
 }
 
 function restart() {
-    toSow(['ball', 'en'], 1);
-    toSow(['ball', 'cristal'], 1);
+    toSow(['ball', 'en'], 20);
+    toSow(['ball', 'cristal'], 100);
 }
 
 function processing_of_cristals() {

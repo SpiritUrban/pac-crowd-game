@@ -12,13 +12,13 @@ function move(x, y) {
     if (x) pers.x += x;
     if (y) pers.y += y;
     // limit
-    if (pers.x < 2) pers.x = 2;
-    if (pers.y < 2) pers.y = 2;
-    if (pers.x > 80) pers.x = 80;
-    if (pers.y > 80) pers.y = 80;
+    if (pers.x < 1) pers.x = 1;
+    if (pers.y < 1) pers.y = 1;
+    if (pers.x > limitArea.x.end) pers.x = limitArea.x.end;
+    if (pers.y > limitArea.x.end) pers.y = limitArea.x.end;
     // DOM
-    pers.link.style.left = pers.x * 10 + "px";
-    pers.link.style.top = pers.y * 10 + "px";
+    pers.link.style.left = pers.x  + "em";
+    pers.link.style.top = pers.y  + "em";
 }
 
 // Level
