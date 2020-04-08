@@ -13,6 +13,10 @@
     width: 1.9em;
     height: 1.9em;
     background: greenyellow;
+
+    background-size: 50em;
+    background: url(src/img/sprite.png);
+    background-position: -47.8em -1.6em;
 }
 
 .pers {

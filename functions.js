@@ -13,12 +13,12 @@ function move(x, y) {
     if (y) pers.y += y;
     // limit
     if (pers.x < 1) pers.x = 1;
-    if (pers.y < 1) pers.y = 1;
+    if (pers.y < 0) pers.y = 0;
     if (pers.x > limitArea.x.end) pers.x = limitArea.x.end;
-    if (pers.y > limitArea.x.end) pers.y = limitArea.x.end;
+    if (pers.y > limitArea.y.end) pers.y = limitArea.y.end;
     // DOM
     pers.link.style.left = pers.x  + "em";
-    pers.link.style.top = pers.y  + "em";
+    pers.link.style.top = pers.y  + 5 + "em";
 }
 
 // Level
